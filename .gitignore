@@ -1,0 +1,5 @@
+src/*.o
+src/slirp
+src/config.log
+src/config.status
+

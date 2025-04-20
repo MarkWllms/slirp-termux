@@ -1,0 +1,11 @@
+Bug fixes:
+- macOS and when using DO_CFSETSPEED: baud rate constants need to be set up
+- macOS and when using DO_CFSETSPEED: -b option needs to set speed again
+- macOS: use getifaddrs() when using a .local address instead of mDNS timeout
+- all: update configure for newer platforms
+- all: fix select time so it doesn't immediately abort on 64-bit systems
+- all: fix off-by-one error when getting the port name from the environment
+- all: typoes
+
+Cameron Kaiser
+
