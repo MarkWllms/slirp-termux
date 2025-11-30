@@ -574,7 +574,7 @@ cfg_add_ptyexec(buff, inso)
 		} else if ((laddr = inet_addr(str2)) == -1) {
 			lprint("Error: Invalid address: %s\r\n", str2);
 			return CFG_ERROR;
-		} else if (add_exec(&exec_list, 1, str, (ntohl(laddr) & 0xff), htons(x)) < 0) {
+		} else if (add_exec(&exec_list, 2, str, (ntohl(laddr) & 0xff), htons(x)) < 0) {
 			lprint("Error: Port already used: %s\r\n", buff);
 			return CFG_ERROR;
 		} else
@@ -583,7 +583,7 @@ cfg_add_ptyexec(buff, inso)
 		if (x < 0 || x > 65535) {
 			lprint("Error: Port out of range: %d\r\n", x);
 			return CFG_ERROR;
-		} else if (add_exec(&exec_list, 1, str, CTL_EXEC, htons(x)) < 0) {
+		} else if (add_exec(&exec_list, 2, str, CTL_EXEC, htons(x)) < 0) {
 			lprint("Error: Port already used.\r\n");
 			return CFG_ERROR;
 		} else
@@ -938,7 +938,7 @@ cfg_ptyexec(buff, inso)
 	char *buff;
 	struct socket *inso;
 {
-	fork_exec(inso, buff, 1);
+	fork_exec(inso, buff, 2);
 	soisfconnected(inso);
 	inso->so_emu = 0;
 
@@ -1153,7 +1153,7 @@ void
 setipdefault(unit)
 	int unit;
 {
-	struct hostent *hp;
+	struct in_addr hp = special_addr;
 	u_int32_t local;
 	ipcp_options *wo = &ipcp_wantoptions[unit];
 
@@ -1169,9 +1169,12 @@ setipdefault(unit)
 	 * If there isn't an IP address for our hostname, too bad.
 	 */
 	wo->accept_local = 1;       /* don't insist on this default value */
-	if ((hp = gethostbyname(hostname)) == NULL)
-	   return;
-	local = *(u_int32_t *)hp->h_addr;
+	/* nandhp: Use the SLiRP special address instead of the host's real
+	 * address for the PPP gateway. This way it works if the host hasn't
+	 * got a real IP address. If the special address is not yet customized,
+	 * use the default 10.0.2.0 */
+	if (hp.s_addr == -1) inet_aton(CTL_SPECIAL, &hp);
+	local = (u_int32_t)hp.s_addr;
 	if (local != 0 && !bad_ip_adrs(local))
 	   wo->ouraddr = local;
 

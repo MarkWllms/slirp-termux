@@ -538,11 +538,11 @@ main_init(argc, argv)
 
   /* Setup exec_list */
   if (exec_shell) {
-    add_exec(&exec_list, 1, exec_shell, CTL_EXEC, htons(23));
+    add_exec(&exec_list, 2, exec_shell, CTL_EXEC, htons(23));
     free(exec_shell);
     exec_shell = 0;
   } else
-    add_exec(&exec_list, 1, "/bin/sh", CTL_EXEC, htons(23));
+    add_exec(&exec_list, 2, "/bin/sh", CTL_EXEC, htons(23));
 
   add_exec(&exec_list, 0, "slirp.ftpd", CTL_EXEC, htons(21));
 #ifdef USE_PPP
