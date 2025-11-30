@@ -11,7 +11,7 @@ CPP = gcc -E $(COMMON_DEFS) -DUSE_PPP -g -O2
 CFLAGS = $(COMMON_DEFS) -g -O2 -O2 -Wall -Wno-implicit -Wmissing-prototypes -fcommon -std=gnu89
 PPPCFLAGS = $(COMMON_DEFS) -g -O2 -O2 
 SHELL = /bin/sh
-MKPRO = /usr/bin/perl ${srcdir}/mkpro
+MKPRO = /data/data/com.termux/files/usr/bin/perl ${srcdir}/mkpro
 MAKEPRO = $(CPP) $< | $(MKPRO) > $@.bak && mv -f $@.bak $@
 
 PPPOBJS = auth.o bsd-comp.o ccp.o chap.o fsm.o ipcp.o lcp.o magic.o md5.o pppdfncs.o upap.o ppp.o
@@ -33,9 +33,9 @@ LIBS = -lcrypt
 
 COMMON_H = config.h ${srcdir}/slirp.h
 
-BINDIR = /usr/local/bin
+BINDIR = /data/data/com.termux/files/usr/bin
 
-MANDIR = /usr/local/man/man1
+MANDIR = /data/data/com.termux/files/usr/share/man/man1
 
 MANEXT = 1
 
