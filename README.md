@@ -1,17 +1,15 @@
-# Slirp-CK
+# Slirp-Termux
 
 Copyright (c) 1995, 2025 Danny Gasparovski, Cameron Kaiser and others.  
 All rights reserved.
+
+Update by Mark Williams to improve compatibility with Termux on Android.
 
 This is an updated version of [Slirp](https://slirp.sourceforge.net/) (rendered also as SLiRP but this hurts my eyes), a tool for creating a SLIP, CSLIP or PPP link over a serial port. Slirp can be configured to do this from a shell prompt over standard input and output, or directly to a local serial port.
 
 The version here has all the patches shipped for 1.0.17 plus another for abnormal termination after startup and various build fixes and is correspondingly tagged as "1.0.18." To build, simply go in the `src/` directory and `configure` and `make`. It is tested on Fedora Linux; macOS compatibility is in progress.
 
 There is copious documentation in `docs/`.
-
-## Do not file issues
-
-... unless you have a patch in hand. Bug reports without patches or pull requests may or may not be addressed, ever. Feature requests without patches are subject to closure or deletion.
 
 ```
 Slirp was written by Danny Gasparovski.
